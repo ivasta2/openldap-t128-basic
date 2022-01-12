@@ -65,11 +65,13 @@ docker run -d --name openldap-t128-basic -v /path/to/my/bootstrap_dir:/customdir
 
 ## Testing
 
+```bash
 LDAPTLS_REQCERT=never ldapsearch -H ldaps://localhost:636 -D cn=admin,dc=t128,dc=local -b dc=t128,dc=local -x '(&(uid=user3)(objectclass=posixAccount)(&(uidNumber=*)(!(uidNumber=0))))' -v -W
 LDAPTLS_REQCERT=never ldapsearch -H ldaps://localhost:636 -D cn=admin,dc=t128,dc=local -b dc=t128,dc=local -x '(&(gidNumber=15003)(objectClass=posixGroup)(cn=*)(&(gidNumber=*)(!(gidNumber=0))))' -v -W
 ldapsearch -H ldaps://localhost:636 -D cn=admin,dc=t128,dc=local -b dc=t128,dc=local -x '(&(memberuid=user3)(objectClass=posixGroup)(cn=*)(&(gidNumber=*)(!(gidNumber=0))))' -v -W
 
 LDAPTLS_REQCERT=never ldapsearch -H ldaps://localhost:636 -D cn=admin,dc=t128,dc=local -b dc=t128,dc=local -x '(&(memberuid=user3)(objectClass=posixGroup)(cn=*)(&(gidNumber=*)(!(gidNumber=0))))' -v -W
+```
 
 Filters:
 (&(uid=adminuser1)(objectclass=posixAccount)(uid=*)(&(uidNumber=*)(!(uidNumber
@@ -170,6 +172,7 @@ dc=t128,dc=local
 
 ## 128T Configuration
 
+```
 ldap-server t128local
   name                t128local
   address             192.168.251.15
@@ -179,6 +182,7 @@ ldap-server t128local
   distinguished-name  cn=admin,dc=t128,dc=local
   password            (removed)
 exit
+```
 
 The embedded password for the admin user is My128TAdminPass and that is the one that needs to be configured in the Conductor
 
